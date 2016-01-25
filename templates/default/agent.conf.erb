@@ -1,9 +1,11 @@
 api_key = "<%= node['appcanary']['agent']['api_key'] %>"
 
+<% unless node['appcanary']['agent']['exclude_system_packages'] %>
 <% case node['platform'] %>
 <% when 'ubuntu', 'debian' %>
 [[files]]
 path = "/var/lib/dpkg/status"
+<% end %>
 <% end %>
 
 <% node['appcanary']['agent']['paths'].each do |path| %>
